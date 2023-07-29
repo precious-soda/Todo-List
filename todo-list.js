@@ -6,7 +6,17 @@ function renderList() {
 
   let todoListHTML = ``;
   for (let i = 0; i < todoList.length; i++) {
-    let html = `<p>${todoList[i]}</p>`;
+
+    const { name, date } = todoList[i];
+
+    let html = `
+    <p>
+    ${name} ${date}
+    <button onClick="
+    todoList.splice(${i},1);
+    renderList();
+    ">Delete</button>
+    </p>`;
     todoListHTML += html;
   }
   let container = document.querySelector('.js-todo-list');
@@ -18,8 +28,14 @@ function addTodo() {
   const inputElement = document.querySelector('.js-name-input');
   const name = inputElement.value;
 
-  todoList.push(name);
-  console.log(todoList);
+  const dateElement = document.querySelector('.js-date-input');
+  const date = dateElement.value;
+
+  todoList.push({
+    name,
+    date
+  });
+
   inputElement.value = '';
 
   renderList();
