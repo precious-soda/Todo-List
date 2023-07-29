@@ -10,13 +10,14 @@ function renderList() {
     const { name, date } = todoList[i];
 
     let html = `
-    <p>
-    ${name} ${date}
-    <button onClick="
+    <div>${name}</div> 
+    <div>${date}</div>
+    <button class="delete-todo-button"
+    onClick="
     todoList.splice(${i},1);
     renderList();
     ">Delete</button>
-    </p>`;
+    `;
     todoListHTML += html;
   }
   let container = document.querySelector('.js-todo-list');
